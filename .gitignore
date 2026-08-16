@@ -1,6 +1,30 @@
+# Environment variables / secrets
 .env
-__pycache__/
-*.pyc
-.pytest_cache/
+.env.*
+!.env.example
+
+# Python virtual environments
 .venv/
 venv/
+env/
+
+# Python generated files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Agentic AI Security Lab 02
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #0d1117;
+            color: #e6edf3;
+        }
+
+        header {
+            padding: 20px 30px;
+
+            background: #161b22;
+
+            border-bottom:
+                1px solid #30363d;
+        }
+
+        header h1 {
+            margin:
+                0 0 5px 0;
+
+            font-size: 24px;
+        }
+
+        header p {
+            margin: 0;
+
+            color: #8b949e;
+        }
+
+        .warning {
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border:
+                1px solid #9e6a03;
+
+            border-radius: 6px;
+
+            background: #3d2d00;
+
+            color: #f2cc60;
+        }
+
+        main {
+            display: grid;
+
+            grid-template-columns:
+                1.3fr 1fr;
+
+            gap: 20px;
+
+            padding: 20px;
+        }
+
+        .panel {
+            padding: 20px;
+
+            background: #161b22;
+
+            border:
+                1px solid #30363d;
+
+            border-radius: 8px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .identity-panel {
+            margin-bottom: 18px;
+
+            padding: 14px;
+
+            background: #0d1117;
+
+            border:
+                1px solid #30363d;
+
+            border-radius: 6px;
+        }
+
+        .identity-panel label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: bold;
+        }
+
+        .identity-row {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        select {
+            min-width: 260px;
+
+            padding: 10px;
+
+            font-size: 14px;
+
+            color: #e6edf3;
+
+            background: #161b22;
+
+            border:
+                1px solid #30363d;
+
+            border-radius: 6px;
+        }
+
+        .identity-note {
+            margin-top: 10px;
+
+            color: #8b949e;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+        .identity-badge {
+            padding:
+                6px 10px;
+
+            border:
+                1px solid #1f6feb;
+
+            border-radius: 20px;
+
+            background: #0d419d;
+
+            color: #ffffff;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+
+            min-height: 120px;
+
+            resize: vertical;
+
+            padding: 12px;
+
+            font-size: 14px;
+
+            color: #e6edf3;
+
+            background: #0d1117;
+
+            border:
+                1px solid #30363d;
+
+            border-radius: 6px;
+        }
+
+        button {
+            margin-top: 10px;
+            margin-right: 8px;
+
+            padding:
+                10px 16px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        #sendButton {
+            color: white;
+            background: #238636;
+        }
+
+        #resetButton {
+            color: white;
+            background: #da3633;
+        }
+
+        .response {
+            min-height: 100px;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            background: #0d1117;
+
+            border:
+                1px solid #30363d;
+
+            border-radius: 6px;
+
+            white-space: pre-wrap;
+        }
+
+        table {
+            width: 100%;
+
+            margin-bottom: 20px;
+
+            border-collapse: collapse;
+
+            font-size: 13px;
+        }
+
+        th,
+        td {
+            padding: 8px;
+
+            border:
+                1px solid #30363d;
+
+            text-align: left;
+        }
+
+        th {
+            background: #21262d;
+        }
+
+        .audit {
+            max-height: 400px;
+
+            overflow-y: auto;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-size: 12px;
+        }
+
+        .audit-entry {
+            padding: 10px 0;
+
+            border-bottom:
+                1px solid #30363d;
+        }
+
+        .tool {
+            color: #58a6ff;
+
+            font-weight: bold;
+        }
+
+        .argument {
+            color: #d2a8ff;
+        }
+
+        .decision-allow {
+            color: #3fb950;
+
+            font-weight: bold;
+        }
+
+        .decision-deny {
+            color: #f85149;
+
+            font-weight: bold;
+        }
+
+        .decision-approval {
+            color: #d29922;
+
+            font-weight: bold;
+        }
+
+        @media (
+            max-width: 900px
+        ) {
+
+            main {
+                grid-template-columns:
+                    1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>
+        Agentic AI Security Lab 02
+    </h1>
+
+    <p>
+        Tool Argument Manipulation
+        & Excessive Agency
+    </p>
+
+    <div class="warning">
+
+        Vulnerable/remediated training environment.
+
+        All users, systems, identities, and assets
+        displayed here are synthetic.
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+<section class="panel">
+
+    <h2>
+        IT Operations Agent
+    </h2>
+
+
+    <!-- ===================================================
+         SIMULATED AUTHENTICATED IDENTITY
+
+         This selector exists only for training.
+
+         In production, identity should come from a trusted
+         authentication/session system such as OIDC, Entra ID,
+         Okta, IAM, or another trusted identity provider.
+         =================================================== -->
+
+    <div class="identity-panel">
+
+        <label for="requester">
+            Simulated Authenticated Identity
+        </label>
+
+        <div class="identity-row">
+
+            <select
+                id="requester"
+                onchange="updateIdentityBadge()"
+            >
+
+                <option value="intern01">
+                    intern01 — Intern
+                </option>
+
+                <option value="jsmith">
+                    jsmith — Standard User
+                </option>
+
+                <option value="mgarcia">
+                    mgarcia — Developer
+                </option>
+
+                <option value="secadmin">
+                    secadmin — Security Administrator
+                </option>
+
+            </select>
+
+
+            <span
+                id="identityBadge"
+                class="identity-badge"
+            >
+                intern01 / intern
+            </span>
+
+        </div>
+
+
+        <div class="identity-note">
+
+            Training control only:
+            this selector simulates an identity that has already
+            been authenticated.
+
+            Production applications should derive identity from a
+            trusted session or identity provider rather than
+            user-controlled input.
+
+        </div>
+
+    </div>
+
+
+    <textarea
+        id="message"
+        placeholder="Ask the IT agent about a user or asset..."
+    ></textarea>
+
+    <br>
+
+
+    <button
+        id="sendButton"
+        onclick="sendMessage()"
+    >
+        Send
+    </button>
+
+
+    <button
+        id="resetButton"
+        onclick="resetLab()"
+    >
+        Reset Lab
+    </button>
+
+
+    <h3>
+        Agent Response
+    </h3>
+
+    <div
+        id="response"
+        class="response"
+    >
+        Waiting for request...
+    </div>
+
+
+    <h3>
+        Tool Audit Log
+    </h3>
+
+    <div
+        id="audit"
+        class="audit"
+    >
+        No tool calls yet.
+    </div>
+
+</section>
+
+
+<section class="panel">
+
+    <h2>
+        Current Lab State
+    </h2>
+
+
+    <h3>
+        Users
+    </h3>
+
+    <div id="users"></div>
+
+
+    <h3>
+        Assets
+    </h3>
+
+    <div id="assets"></div>
+
+</section>
+
+
+</main>
+
+
+<script>
+
+
+const IDENTITY_ROLES = {
+
+    intern01: "intern",
+
+    jsmith: "standard_user",
+
+    mgarcia: "developer",
+
+    secadmin: "security_admin"
+
+};
+
+
+async function loadState() {
+
+    const response =
+        await fetch(
+            "/api/state"
+        );
+
+    const data =
+        await response.json();
+
+    renderState(
+        data
+    );
+}
+
+
+function updateIdentityBadge() {
+
+    const requester =
+        document
+            .getElementById(
+                "requester"
+            )
+            .value;
+
+    const role =
+        IDENTITY_ROLES[
+            requester
+        ]
+        || "unknown";
+
+    document
+        .getElementById(
+            "identityBadge"
+        )
+        .textContent =
+            requester
+            + " / "
+            + role;
+}
+
+
+async function sendMessage() {
+
+    const messageBox =
+        document.getElementById(
+            "message"
+        );
+
+
+    const requesterBox =
+        document.getElementById(
+            "requester"
+        );
+
+
+    const message =
+        messageBox
+            .value
+            .trim();
+
+
+    const requester =
+        requesterBox
+            .value
+            .trim();
+
+
+    if (!message) {
+        return;
+    }
+
+
+    document
+        .getElementById(
+            "response"
+        )
+        .textContent =
+            "Agent is processing the request...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/chat",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+                                message:
+                                    message,
+
+                                requester:
+                                    requester
+                            }
+                        )
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            document
+                .getElementById(
+                    "response"
+                )
+                .textContent =
+                    "ERROR: "
+                    + data.error;
+
+            return;
+        }
+
+
+        document
+            .getElementById(
+                "response"
+            )
+            .textContent =
+                data.reply;
+
+
+        renderState(
+            data
+        );
+
+    }
+
+    catch (error) {
+
+        document
+            .getElementById(
+                "response"
+            )
+            .textContent =
+                "ERROR: "
+                + error;
+    }
+}
+
+
+async function resetLab() {
+
+    const response =
+        await fetch(
+            "/api/reset",
+            {
+                method: "POST"
+            }
+        );
+
+
+    const data =
+        await response.json();
+
+
+    document
+        .getElementById(
+            "response"
+        )
+        .textContent =
+            "Lab reset complete.";
+
+
+    document
+        .getElementById(
+            "message"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "requester"
+        )
+        .value =
+            "intern01";
+
+
+    updateIdentityBadge();
+
+
+    renderState(
+        data
+    );
+}
+
+
+function renderState(
+    data
+) {
+
+    renderUsers(
+        data.users
+    );
+
+    renderAssets(
+        data.assets
+    );
+
+    renderAudit(
+        data.audit_log
+    );
+}
+
+
+function renderUsers(
+    users
+) {
+
+    let html = `
+        <table>
+
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+    `;
+
+
+    Object
+        .values(users)
+        .forEach(
+            user => {
+
+                html += `
+                    <tr>
+
+                        <td>
+                            ${escapeHtml(
+                                user.username
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                user.name
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                user.department
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                user.role
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                user.status
+                            )}
+                        </td>
+
+                    </tr>
+                `;
+            }
+        );
+
+
+    html += "</table>";
+
+
+    document
+        .getElementById(
+            "users"
+        )
+        .innerHTML =
+            html;
+}
+
+
+function renderAssets(
+    assets
+) {
+
+    let html = `
+        <table>
+
+            <tr>
+                <th>IP</th>
+                <th>Hostname</th>
+                <th>Owner</th>
+                <th>OS</th>
+                <th>Criticality</th>
+            </tr>
+    `;
+
+
+    Object
+        .values(assets)
+        .forEach(
+            asset => {
+
+                html += `
+                    <tr>
+
+                        <td>
+                            ${escapeHtml(
+                                asset.ip
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                asset.hostname
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                asset.owner
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                asset.os
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                asset.criticality
+                            )}
+                        </td>
+
+                    </tr>
+                `;
+            }
+        );
+
+
+    html += "</table>";
+
+
+    document
+        .getElementById(
+            "assets"
+        )
+        .innerHTML =
+            html;
+}
+
+
+function getDecisionClass(
+    decision
+) {
+
+    if (decision === "ALLOW") {
+        return "decision-allow";
+    }
+
+    if (decision === "DENY") {
+        return "decision-deny";
+    }
+
+    if (
+        decision ===
+        "REQUIRE_APPROVAL"
+    ) {
+        return "decision-approval";
+    }
+
+    return "";
+}
+
+
+function renderAudit(
+    entries
+) {
+
+    if (
+        !entries
+        ||
+        entries.length === 0
+    ) {
+
+        document
+            .getElementById(
+                "audit"
+            )
+            .innerHTML =
+                "No tool calls yet.";
+
+        return;
+    }
+
+
+    let html = "";
+
+
+    entries
+        .slice()
+        .reverse()
+        .forEach(
+            entry => {
+
+                const decision =
+                    entry.decision
+                    || "UNKNOWN";
+
+                const decisionClass =
+                    getDecisionClass(
+                        decision
+                    );
+
+
+                html += `
+                    <div
+                        class="audit-entry"
+                    >
+
+                        <div>
+
+                            <span
+                                class="tool"
+                            >
+
+                                ${escapeHtml(
+                                    entry.tool
+                                )}
+
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            Requester:
+
+                            ${escapeHtml(
+                                entry.requester
+                                || "unknown"
+                            )}
+
+                            (${escapeHtml(
+                                entry.requester_role
+                                || "unknown"
+                            )})
+
+                        </div>
+
+
+                        <div>
+
+                            Decision:
+
+                            <span
+                                class="${decisionClass}"
+                            >
+
+                                ${escapeHtml(
+                                    decision
+                                )}
+
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="argument"
+                        >
+
+                            Arguments:
+
+                            ${escapeHtml(
+                                JSON.stringify(
+                                    entry.arguments
+                                )
+                            )}
+
+                        </div>
+
+
+                        <div>
+
+                            Reason:
+
+                            ${escapeHtml(
+                                entry.reason
+                                || ""
+                            )}
+
+                        </div>
+
+
+                        <div>
+
+                            Result:
+
+                            ${escapeHtml(
+                                JSON.stringify(
+                                    entry.result
+                                )
+                            )}
+
+                        </div>
+
+
+                    </div>
+                `;
+            }
+        );
+
+
+    document
+        .getElementById(
+            "audit"
+        )
+        .innerHTML =
+            html;
+}
+
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value
+    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+}
+
+
+updateIdentityBadge();
+
+loadState();
+
+
+</script>
+
+
+</body>
+
+</html>
